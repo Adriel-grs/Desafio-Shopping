@@ -1,4 +1,8 @@
 
+let arrayLoja = [];
+let arrayNomes = [];
+let arrayValores = [];
+
          menuDeEscolhas ();
 function menuDeEscolhas (){
     let escolha = Number(prompt(`Digite o que deseja fazer a seguir
@@ -25,6 +29,7 @@ function menuDeEscolhas (){
         }
 }
 
+
 function lojas (tipoDaLoja){
     let opcao = "sim";
     if (tipoDaLoja === 1){
@@ -35,7 +40,12 @@ function lojas (tipoDaLoja){
             carrinho(valorProduto);
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
-                menuDeEscolhas();
+                menuDeEscolhas ();
+            }else if (opcao === "sim"){
+                lojas (tipoDaLoja);
+            }else{
+                console.log("Resposta inválida.");
+                menuDeEscolhas ();
             }
         }
        
@@ -47,7 +57,12 @@ function lojas (tipoDaLoja){
             carrinho(valorProduto);
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
-                menuDeEscolhas();
+                menuDeEscolhas ();
+            }else if (opcao === "sim"){
+                lojas (tipoDaLoja);
+            }else {
+                console.log("Resposta inválida");
+                menuDeEscolhas ();
             }
         }
        
@@ -61,20 +76,31 @@ function lojas (tipoDaLoja){
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
                 menuDeEscolhas();
+            }else if (opcao === "sim"){
+                lojas (tipoDaLoja);                
+            }else {
+                console.log ("Resposta inválida");
+                menuDeEscolhas ();
             }
         }
        
     }
 
 }
-let arrayNomes = [];
-let arrayValores = [];
+
+
 function registroDasLojas (nome,valor){
     let codigoProduto;
     codigoProduto++;
 
 }
 
+
 function carrinho (){
+
+}
+
+
+function encerrarOperacao (){
 
 }
