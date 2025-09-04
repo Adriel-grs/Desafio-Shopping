@@ -1,7 +1,9 @@
 
-let arrayLoja = [];
+let arrayLoja = ["Vestuário", "Perfumaria", "Loja de Calçados"];
 let arrayNomes = [];
 let arrayValores = [];
+let totalLoja = [0,0,0];
+let codigoProduto;
 
          menuDeEscolhas ();
 function menuDeEscolhas (){
@@ -25,7 +27,7 @@ function menuDeEscolhas (){
                 lojas(escolha);
                 break;
             default:
-                console.log("OPeração inválida.")
+                console.log("Operação inválida.")
         }
 }
 
@@ -35,9 +37,8 @@ function lojas (tipoDaLoja){
     if (tipoDaLoja === 1){
         while (opcao === "sim"){
             let nomeProduto = prompt ("Digite o nome do produto");
-            let valorProduto = prompt ("Digite o valor do produto.");
-            registroDasLojas(nomeProduto, valorProduto);
-            carrinho(valorProduto);
+            let valorProduto = Number(prompt ("Digite o valor do produto."));
+            carrinho(tipoDaLoja, nomeProduto, valorProduto);
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
                 menuDeEscolhas ();
@@ -52,9 +53,8 @@ function lojas (tipoDaLoja){
     }else if (tipoDaLoja === 2){
          while (opcao === "sim"){
             let nomeProduto = prompt ("Digite o nome do produto");
-            let valorProduto = prompt ("Digite o valor do produto.");
-            registroDasLojas(nomeProduto, valorProduto);
-            carrinho(valorProduto);
+            let valorProduto = Number(prompt ("Digite o valor do produto."));
+            carrinho(tipoDaLoja, nomeProduto, valorProduto);
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
                 menuDeEscolhas ();
@@ -70,9 +70,8 @@ function lojas (tipoDaLoja){
     }else if (tipoDaLoja === 3){
          while (opcao === "sim"){
             let nomeProduto = prompt ("Digite o nome do produto");
-            let valorProduto = prompt ("Digite o valor do produto.");
-            registroDasLojas(nomeProduto, valorProduto);
-            carrinho(valorProduto);
+            let valorProduto = Number(prompt ("Digite o valor do produto."));
+            carrinho(tipoDaLoja, nomeProduto, valorProduto);
             opcao = prompt("Você deseja continuar comprando nessa loja ?");
             if (opcao === "não" || opcao === "nao"){
                 menuDeEscolhas();
@@ -89,15 +88,28 @@ function lojas (tipoDaLoja){
 }
 
 
-function registroDasLojas (nome,valor){
-    let codigoProduto;
+function carrinho (opcaoLoja, nome, valor){
     codigoProduto++;
-
-}
-
-
-function carrinho (){
-
+    switch (opcaoLoja){
+        case 1:
+            arrayLoja [0];
+            arrayNomes [codigoProduto] = nome;
+            arrayValores [codigoProduto] = valor; 
+            totalLoja [0] = (totalLoja[0] + valor);
+            break;
+        case 2:
+            arrayLoja [1];
+            arrayNomes [codigoProduto] = nome;
+            arrayValores [codigoProduto] = valor;
+            totalLoja [1] = (totalLoja[1] + valor);
+            break;
+        case 3:
+            arrayLoja [2];
+            arrayNomes [codigoProduto] = nome;
+            arrayValores [codigoProduto] = valor;
+            totalLoja [2] = (totalLoja[2] + valor);
+            break;    
+    }
 }
 
 
