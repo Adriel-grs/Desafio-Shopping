@@ -1,7 +1,7 @@
 /*
 Funcionamento dos arreys:
 Cada  índices dos arrays "arrayNomes" e "arrayValores" estão correlacionados diretamente.
-Ou seja, o nome do produto que está salvo em "arrayNomes[0]" tem o seu respectivo nome salvo em "arrayValores[0]"
+Ou seja, o nome do produto que está salvo em "arrayNomes[0]" tem o seu respectivo valor salvo em "arrayValores[0]"
 */
 let arrayLoja = ["Vestuário", "Perfumaria", "Loja de Calçados"];
 let arrayNomes = [];
