@@ -66,19 +66,16 @@ function lojas (tipoDaLoja){
 function carrinho (opcaoLoja, nome, valor){
     codigoProduto++;  
     arrayLoja [opcaoLoja];
-    arrayNomes [codigoProduto] = nome;
-    arrayValores [codigoProduto] = valor;
+    arrayNomes.push (nome);
+    arrayValores.push (valor);
     totalLoja [opcaoLoja] = (totalLoja[opcaoLoja] + valor);
     
-    console.log (`Relatório de compra:
-        Produto: ${arrayNomes[codigoProduto]}
-        Valor: ${arrayValores[codigoProduto]}
-        Total gasto em "${arrayLoja[opcaoLoja]}" : ${totalLoja}`);
-
-    return `Relatório de compra:
+    let mostrarResultado =  `Relatório de compra:
     Produto: ${arrayNomes[codigoProduto]}
     Valor: ${arrayValores[codigoProduto]}
-    Total gasto em "${arrayLoja[opcaoLoja]}: "`;
+    Total gasto em "${arrayLoja[opcaoLoja]}: ${totalLoja}"`;
+
+    return mostrarResultado;
 }
 
 
