@@ -33,13 +33,14 @@ function menuDeEscolhas (){
        }
 }
 
+
 //Aqui realiza o redirecionamento com base nas escolhas que foram feitas anteriormente, cada escolha está relacionada a uma loja.
 function lojas (tipoDaLoja){
     let opcao = "sim";
 
     while (opcao === "sim"){
         let nomeProduto = prompt ("Digite o nome do produto");
-        let valorProduto = Number(prompt ("Digite o valor do produto."));
+        let valorProduto = parseFloat(prompt ("Digite o valor do produto."));
         let chamado = carrinho(tipoDaLoja, nomeProduto, valorProduto);
         console.log(chamado);
 
@@ -56,6 +57,7 @@ function lojas (tipoDaLoja){
        
 
 }
+
 
 //Armazenamento dos nomes e valores de cada produto em cada loja
 function carrinho (opcaoLoja, nome, valor){
@@ -74,12 +76,63 @@ function carrinho (opcaoLoja, nome, valor){
 }
 
 
-function encerrarOperacao (){
-
-}
-
-function editarProduto (){
-
-}
 // Função callBack. É um tipo de função que entra como parâmetro para outra função,
 //e dentro do código desta outra função ela é executada.
+
+function encerrarOperacao (){
+    const montante = totalLoja.reduce (function(soma, atual){
+        return  soma + atual;
+    },0);
+
+    if (montante === 1000){
+        console.log (`Você ganhou um desconto de 15%.
+            Valor nominal: ${montante}
+            Valor com o desconto: ${montante - (montante*0.15)}
+            COMPRA APROVADA!`);
+        return;
+    }else if (montante === 850 ){
+        console.log (`Valor total das compras: ${montante};
+            COMPRA APROVADA !`);    
+        return;   
+    }else if (montante > 1000){
+        console.log (`Valor total das compras: ${montante};
+            COMPRA REPROVADA !
+            Tente Retirar algum produto.`);
+        editarCarrinho (montante);    
+        return;  
+    }else if (montante < 850){
+         console.log ("Compra aprovada, mas ainda dava pra gastar mais em !");
+        return;
+    }else if (montante > 850 && montante < 1000 ){
+        console.log ("Compra acima do valor combinado (R$ 850). Retire alguns itens, ou acrescente até chegar em R$ 1000");
+        editarCarrinho (montante); 
+        return;
+    }else {
+        console.log ("ERRO!");
+        return;
+    }
+}
+
+
+function editarCarrinho (totalDasCompras){
+    console.log (`Gasto total: R$ ${totalDasCompras}
+        Ainda podes gastar: R$ ${1000 - totalDasCompras};
+        Ou exluir compras equivalentes a: R$ ${totalDasCompras - 850} `);
+
+    const direcionamento = Number(prompt (`Escolha a operação:
+        1- Excluir produto;
+        2- Adicionar produto.`));
+        if (direcionamento === 1){
+            for (i = 0; i < arrayValores.length; i++){
+                console.log (`${i + 1}- ${arrayNomes[i]}: R$ ${arrayValores[i]}`);
+            }
+            
+        }else if (direcionamento === 2){
+            console.log ("Se atente ao valor do produto !");
+            menuDeEscolhas();
+            return;
+        }else {
+            console.log ("Escolha inválida !");
+            return;
+        }
+}
