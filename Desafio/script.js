@@ -44,7 +44,7 @@ function lojas (tipoDaLoja){
         let chamado = carrinho(tipoDaLoja, nomeProduto, valorProduto);
         console.log(chamado);
 
-        opcao = prompt("Você deseja continuar comprando nessa loja ?");
+        opcao = prompt("Você deseja continuar comprando nessa loja ?").toLowerCase ();
         if (opcao === "não" || opcao === "nao"){
             menuDeEscolhas ();
             return;
@@ -76,23 +76,23 @@ function carrinho (opcaoLoja, nome, valor){
 }
 
 
-// Função callBack. É um tipo de função que entra como parâmetro para outra função,
-//e dentro do código desta outra função ela é executada.
-
 function encerrarOperacao (){
     const montante = totalLoja.reduce (function(soma, atual){
         return  soma + atual;
     },0);
-
+    //Aqui, a depender do valor total das compras, a compra ou vai ser recusada ou vai ser aprovada.
+    //Caso reprovada, o usuário será redirecionado para editar as compras.
     if (montante === 1000){
         console.log (`Você ganhou um desconto de 15%.
             Valor nominal: ${montante}
             Valor com o desconto: ${montante - (montante*0.15)}
             COMPRA APROVADA!`);
+        lanchonete ();
         return;
     }else if (montante === 850 ){
         console.log (`Valor total das compras: ${montante};
-            COMPRA APROVADA !`);    
+            COMPRA APROVADA !`);
+        lanchonete ();    
         return;   
     }else if (montante > 1000){
         console.log (`Valor total das compras: ${montante};
@@ -102,6 +102,7 @@ function encerrarOperacao (){
         return;  
     }else if (montante < 850){
          console.log ("Compra aprovada, mas ainda dava pra gastar mais em !");
+         lanchonete ();
         return;
     }else if (montante > 850 && montante < 1000 ){
         console.log ("Compra acima do valor combinado (R$ 850). Retire alguns itens, ou acrescente até chegar em R$ 1000");
@@ -113,20 +114,51 @@ function encerrarOperacao (){
     }
 }
 
-
+//Caso o valor total esteja entre 850 e 1000 OU maior que mil, o usuário será redirecionado para aqui.
 function editarCarrinho (totalDasCompras){
-    console.log (`Gasto total: R$ ${totalDasCompras}
-        Ainda podes gastar: R$ ${1000 - totalDasCompras};
-        Ou exluir compras equivalentes a: R$ ${totalDasCompras - 850} `);
+    console.log (`Gasto total: R$ ${totalDasCompras}`);
+    if (totalDasCompras > 1000){
+        console.log (`Você precisa tirar um total de: R$ ${totalDasCompras - 1000} em compras.`);
+    }else if (totalDasCompras > 850 && totalDasCompras < 1000){
+        console.log (`Ainda podes gastar: R$ ${1000 - totalDasCompras};
+        Ou exluir compras equivalentes a: R$ ${totalDasCompras - 850}`)
+    }
 
     const direcionamento = Number(prompt (`Escolha a operação:
         1- Excluir produto;
         2- Adicionar produto.`));
+        //Caso ele dceida excluir algum produto ele entra aqui
         if (direcionamento === 1){
             for (i = 0; i < arrayValores.length; i++){
                 console.log (`${i + 1}- ${arrayNomes[i]}: R$ ${arrayValores[i]}`);
             }
-            
+            let quantidadeItens = Number(prompt("Quantos ítens você deseja excluir ?"));
+
+            if (typeof quantidadeItens !== "number"){
+                console.log ("Escolha inválida");
+                return;
+            }else if (quantidadeItens > arrayValores.length || quantidadeItens <= 0){
+                console.log ("Quantidade inválida.");
+                return;
+            }else {
+                for (i = 0; i < quantidadeItens; i++){
+                    let itenEscolhido = Number(prompt("Digite o íten que deseja excluir: "));
+                    itenEscolhido -= 1; //Coloca a escolha do íten no índice correto (já que o array começa com 0)
+                    if (typeof itenEscolhido !== "number"){
+                        console.log ("Escolha inválida.");
+                    }else if (itenEscolhido > arrayValores.length || itenEscolhido <= 0){
+                        console.log ("Esse ítem não existe.");
+                    }else {
+                        //Exclusão dos ítens escolhidos.
+                        arrayValores.splice ((itenEscolhido ), 1);
+                        arrayNomes.splice ((itenEscolhido ), 1);
+                    }
+                } 
+                encerrarOperacao ();
+                return;              
+            }
+
+        //Caso ele decida comprar mais produtos ele entra aqui.
         }else if (direcionamento === 2){
             console.log ("Se atente ao valor do produto !");
             menuDeEscolhas();
@@ -136,3 +168,23 @@ function editarCarrinho (totalDasCompras){
             return;
         }
 }
+
+const valorTotalLanches = 124;
+arrayLanches = [];
+function lanchonete (){
+    let opcaoLanches = "sim";
+    while (opcaoLanches === "sim"){
+        opcaoLanches = prompt("Deseja comprar algum lanche").toLowerCase ();
+        if (opcaoLanches === "nao" || opcaoLanches === "não"){
+
+        }else if (opcaoLanches ){
+
+        }
+
+    }
+    
+
+}
+
+// Função callBack. É um tipo de função que entra como parâmetro para outra função,
+//e dentro do código desta outra função ela é executada.
