@@ -126,7 +126,8 @@ function editarCarrinho (totalDasCompras){
 
     const direcionamento = Number(prompt (`Escolha a operação:
         1- Excluir produto;
-        2- Adicionar produto.`));
+        2- Adicionar produto;
+        3- Sair assim mesmo (A não ser que seu total de compra ultrapasse os R$1000)`));
         //Caso ele dceida excluir algum produto ele entra aqui
         if (direcionamento === 1){
             for (i = 0; i < arrayValores.length; i++){
@@ -143,7 +144,7 @@ function editarCarrinho (totalDasCompras){
             }else {
                 for (i = 0; i < quantidadeItens; i++){
                     let itenEscolhido = Number(prompt("Digite o íten que deseja excluir: "));
-                    itenEscolhido -= 1; //Coloca a escolha do íten no índice correto (já que o array começa com 0)
+                    itenEscolhido =(itenEscolhido - 1); //Coloca a escolha do íten no índice correto (já que o array começa com 0)
                     if (typeof itenEscolhido !== "number"){
                         console.log ("Escolha inválida.");
                     }else if (itenEscolhido > arrayValores.length || itenEscolhido <= 0){
@@ -162,6 +163,9 @@ function editarCarrinho (totalDasCompras){
         }else if (direcionamento === 2){
             console.log ("Se atente ao valor do produto !");
             menuDeEscolhas();
+            return;
+        }else if (direcionamento === 3){
+            lanchonete ();
             return;
         }else {
             console.log ("Escolha inválida !");
