@@ -173,21 +173,63 @@ function editarCarrinho (totalDasCompras){
         }
 }
 
-const valorTotalLanches = 124;
-arrayLanches = [];
-function lanchonete (){
-    let opcaoLanches = "sim";
-    while (opcaoLanches === "sim"){
-        opcaoLanches = prompt("Deseja comprar algum lanche").toLowerCase ();
-        if (opcaoLanches === "nao" || opcaoLanches === "não"){
-            return;
-        }else if (opcaoLanches !== "sim"){
-            console.log ("Resposta inválida.");
+const cotinhaParaLanche = {
+    Gabriel: 34,
+    Rafael: 25,
+    Bruno: 15,
+    Luiza: 50
+};
+
+const orcamentoLanche = Object.values(cotinhaParaLanche).reduce((soma, valor) => soma + valor, 0);
+let arrayLanches = [];
+
+function lanchonete() {
+    console.log("Agora vamos montar o carrinho do McDonald's!");
+    console.log(`Orçamento total para os lanches: R$ ${orcamentoLanche}`);
+
+    let totalLanches = 0;
+
+    const pedidos = [
+        { nome: "Gabriel", itens: 3 },
+        { nome: "Rafael", itens: 3 },
+        { nome: "Bruno", itens: 3 },
+        { nome: "Luiza", itens: 3 }
+    ];
+
+    for (let pessoa of pedidos) {
+        console.log(`\n🔹 Adicionando itens de ${pessoa.nome}:`);
+        for (let i = 1; i <= pessoa.itens; i++) {
+            let nomeItem = prompt(`Digite o nome do ${i}º item de ${pessoa.nome}:`);
+            let valorItem = parseFloat(prompt(`Digite o valor de "${nomeItem}":`));
+
+            // Validação de valor
+            if (isNaN(valorItem) || valorItem <= 0) {
+                console.log("Valor inválido! Item ignorado.");
+                i--; // Repete esse item
+                continue;
+            }
+
+            arrayLanches.push({ pessoa: pessoa.nome, item: nomeItem, valor: valorItem });
+            totalLanches += valorItem;
+
+            console.log(`${nomeItem} - R$ ${valorItem.toFixed(2)}`);
         }
     }
-    
 
+    console.log(`\nTotal dos lanches: R$ ${totalLanches.toFixed(2)}`);
+
+    if (totalLanches > orcamentoLanche) {
+        console.log(`O valor passou do orçamento! Você precisa retirar R$ ${(totalLanches - orcamentoLanche).toFixed(2)}.`);
+        console.log("Tente modificar os itens escolhidos para caber no orçamento.");
+    } else if (totalLanches < orcamentoLanche) {
+        console.log(`O valor está abaixo do orçamento. Ainda podem gastar R$ ${(orcamentoLanche - totalLanches).toFixed(2)}.`);
+        console.log("Compra aprovada, podem adicionar algo se quiserem.");
+    } else {
+        console.log("Compra dentro do orçamento! Bom apetite!");
+    }
+
+    console.log("\nItens finais do carrinho:");
+    arrayLanches.forEach((lanche, index) => {
+        console.log(`${index + 1}. ${lanche.pessoa} - ${lanche.item} - R$ ${lanche.valor.toFixed(2)}`);
+    });
 }
-
-// Função callBack. É um tipo de função que entra como parâmetro para outra função,
-//e dentro do código desta outra função ela é executada.
