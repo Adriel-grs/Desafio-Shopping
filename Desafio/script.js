@@ -176,11 +176,10 @@ function lanchonete (){
     while (opcaoLanches === "sim"){
         opcaoLanches = prompt("Deseja comprar algum lanche").toLowerCase ();
         if (opcaoLanches === "nao" || opcaoLanches === "não"){
-
-        }else if (opcaoLanches ){
-
+            return;
+        }else if (opcaoLanches !== "sim"){
+            console.log ("Resposta inválida.");
         }
-
     }
     
 
